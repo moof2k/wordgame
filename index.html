@@ -7,7 +7,7 @@
     <title>Word Game</title>
     
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,55 +17,82 @@
      <![endif]-->
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-    <script type="text/javascript" src="jquery.jplayer.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/jquery.jplayer.min.js"></script>
     <script src="game.js"></script>
+    
+    <style>
+        body {
+            padding-top: 70px;
+            padding-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">wordgame</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">mode <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a ng-href="#" ng-click="setmode('any')">any letter</a></li>
+                            <li><a ng-href="#" ng-click="setmode('first')">first letter only</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a>{{number_right}} correct</a></li>
+                </ul>
+            </div>
+            
+        </div>
+    </nav>
+    
     <div>
         <center>
-        <div>
-        <img src="img/{{word}}.jpg">
-        </div>
-        
-        <div>
-            <h1 style="font-size: 72px;">{{clue}} </h1>
-        </div>
-        <div ng-hide="!right_indicator">
-            <h1 style="font-size: 72px; color: #468847">✔</h1>
-        </div>
-        <div ng-hide="!wrong_indicator">
-            <h1 style="font-size: 72px; color: #ff0000">X</h1>
-        </div>
-        
-        <br><br><br>
-        <div>
-        <input class="btn btn-primary" type="button" value="next" ng-click="next()">
-        </div>
-        <br>
-        {{number_right}} correct
+            <div>
+                <img src="img/{{word}}.jpg">
+            </div>
+            
+            <div>
+                <h1 style="font-size: 72px;">{{clue}} </h1>
+            </div>
+            <div ng-hide="!right_indicator">
+                <h1 style="font-size: 72px; color: #468847">✔</h1>
+            </div>
+            <div ng-hide="!wrong_indicator">
+                <h1 style="font-size: 72px; color: #ff0000">X</h1>
+            </div>
         </center>
     </div>
     
     
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     
     <br><br><br><br>
     <div id="jpId"></div>
     
     <script>
-$(document).ready(function() {
-                  $("#jpId").jPlayer( {
-                                     ready: function () {
-                                     $(this).jPlayer("setMedia", {
-                                                     mp3: "correct.mp3" // Defines the mp3 url
-                                                     });
-                                     }
-                                     });
-});
-        </script>
+    $(document).ready(function() {
+        $("#jpId").jPlayer( {
+            ready: function () {
+                $(this).jPlayer("setMedia", {mp3: "correct.mp3"});
+            }
+        });
+    });
+    </script>
 </body>
 </html>
 

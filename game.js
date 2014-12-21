@@ -109,12 +109,27 @@ function GameCntl($scope, $timeout) {
     $scope.wrong_indicator = false;
     $scope.number_right = 0;
     $scope.timeout = 0;
+    $scope.mode = "any";
+    
+    $scope.setmode = function(m) {
+        $scope.mode = m;
+        $scope.next();
+    }
     
     $scope.next = function() {
         
         $scope.timeout = 0;
+        
+        // Pick a random word
         $scope.word = words[Math.floor(Math.random()*words.length)];
-        $scope.index = Math.floor(Math.random()*$scope.word.length);
+        
+        // Select a letter
+        if($scope.mode == "any") {
+            $scope.index = Math.floor(Math.random()*$scope.word.length);
+        } else {
+            $scope.index = 0;
+        }
+        
         $scope.letter = $scope.word[$scope.index];
         
         $scope.resetclue();
@@ -132,15 +147,22 @@ function GameCntl($scope, $timeout) {
     };
     
     $scope.keyup = function(e) {
+        // If they already got it right, ignore input
         if($scope.right_indicator) {
             return;
         }
         
         c = String.fromCharCode(e.keyCode);
-        console.log(c);
+        
+        // Ignore key presses outside of A-Z
+        if(c < 'A' || c > 'Z') {
+            return;
+        }
         
         if(c == $scope.letter.toUpperCase()) {
             $scope.correct();
+        } else if(c == ' ') {
+            $scope.next();
         } else {
             $scope.incorrect(c);
         }
