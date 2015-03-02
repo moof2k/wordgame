@@ -7,3 +7,5 @@ The game shows you a picture along with the corresponding word with one letter m
 key of the missing letter.
 
 http://moof2k.github.io/wordgame/
+
+Words
